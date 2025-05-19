@@ -4,147 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Gerador de Códigos de Barras</title>
+
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- JsBarcode e jsPDF -->
   <script defer src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <style>
-    body {
-      background: #f4f6fa;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    .container {
-      max-width: 960px;
-      margin: 2rem auto;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgb(0 0 0 / 0.1);
-      padding: 2rem 3rem;
-    }
-    h1 {
-      font-weight: 70;
-      font-size: 2.5rem;
-      color: #2c3e50;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      letter-spacing: 1px;
-    }
-    .slogan {
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: #2980b9;
-  text-align: center;
-  margin-top: -0.5rem;
-  margin-bottom: 1.5rem;
-  font-style: italic;
-  letter-spacing: 0.5px;
-}
 
-    label {
-      font-weight: 600;
-      color: #34495e;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-    select, input[type=number], textarea {
-      border: 1.5px solid #ccc;
-      border-radius: 6px;
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      width: 100%;
-      transition: border-color 0.3s ease;
-    }
-    select:focus, input[type=number]:focus, textarea:focus {
-      border-color: #3498db;
-      outline: none;
-    }
-    button {
-      background-color: #2980b9;
-      color: white;
-      font-weight: 700;
-      font-size: 1.1rem;
-      padding: 0.75rem 1.75rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.25s ease;
-      margin-top: 1rem;
-      display: block;
-      width: 100%;
-      max-width: 320px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: 0 5px 15px rgb(41 128 185 / 0.4);
-    }
-    button:hover {
-      background-color: #1c5980;
-    }
-    .barcodes {
-      margin-top: 2rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 24px;
-      justify-content: center;
-    }
-    .barcode-card {
-      background: #ecf0f1;
-      border-radius: 12px;
-      padding: 1rem;
-      width: 200px;
-      box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
-      text-align: center;
-    }
-    .barcode-svg {
-      margin-bottom: 1rem;
-      max-width: 100%;
-      height: auto;
-    }
-    .download-btn {
-      background-color: #27ae60;
-      padding: 0.5rem 1rem;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      width: 100%;
-      box-shadow: 0 3px 8px rgb(39 174 96 / 0.5);
-      transition: background-color 0.25s ease;
-    }
-    .download-btn:hover {
-      background-color: #1e8449;
-    }
-    .error {
-      color: #e74c3c;
-      text-align: center;
-      font-weight: 700;
-      margin-top: 1rem;
-    }
-    .flex-row {
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
-    }
-    .flex-col {
-      flex: 1 1 250px;
-      min-width: 250px;
-    }
-    @media (max-width: 600px) {
-      .flex-row {
-        flex-direction: column;
-      }
-    }
-  </style>
+  <!-- CSS local -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- JS local -->
+  <script defer src="js/script.js"></script>
 </head>
 <body>
   <div class="container">
-    <div class="container">
-  <img src="/assets/logotipo.png" alt="Logotipo" style="display: block; margin: 0 auto 1rem; max-width: 150px;">
+    <img src="/assets/logotipo.png" alt="Logotipo" style="display: block; margin: 0 auto 1rem; max-width: 150px;">
     <p class="slogan">ENTERPRISE - RACING PIGEONS</p>
+
     <div class="flex-row">
       <div class="flex-col">
         <label for="barcodeType">Tipo de Código de Barra</label>
-        <select id="barcodeType" aria-label="Selecionar tipo de código de barra">
+        <select id="barcodeType">
           <option value="EAN13">EAN-13</option>
           <option value="CODE128">CODE128</option>
           <option value="CODE39">CODE39</option>
@@ -152,13 +34,20 @@
           <option value="ITF">ITF</option>
         </select>
       </div>
+
       <div class="flex-col">
-        <label for="quantityInput">Quantidade para gerar automaticamente</label>
-        <input id="quantityInput" type="number" min="1" placeholder="Ex: 5" aria-label="Quantidade para geração automática"/>
+        <label for="quantityInput">Quantidade</label>
+        <input id="quantityInput" type="number" min="1" placeholder="Ex: 5" />
       </div>
+
       <div class="flex-col">
         <label for="codesInput">Códigos manuais (um por linha)</label>
-        <textarea id="codesInput" rows="4" placeholder="Ex: 7891234567890&#10;0123456789012" aria-label="Códigos manuais para geração"></textarea>
+        <textarea id="codesInput" rows="4" placeholder="7891234567890&#10;0123456789012"></textarea>
+      </div>
+
+      <div class="flex-col">
+        <label for="extraField">Identificador</label>
+        <input id="extraField" type="text" placeholder="Ex: Lote 001" />
       </div>
     </div>
 
@@ -168,245 +57,5 @@
     <div id="output" class="barcodes"></div>
     <p id="errorMessage" class="error" role="alert" aria-live="assertive"></p>
   </div>
-
-  <script>
-    const { jsPDF } = window.jspdf;
-
-    document.getElementById("generateBtn").addEventListener("click", generateBarcodes);
-    document.getElementById("exportPdfBtn").addEventListener("click", exportPDF);
-
-    function calculateEAN13CheckDigit(code) {
-      let sum = 0;
-      for (let i = 0; i < 12; i++) {
-        sum += parseInt(code[i]) * (i % 2 === 0 ? 1 : 3);
-      }
-      let remainder = sum % 10;
-      return remainder === 0 ? 0 : 10 - remainder;
-    }
-
-    function generateEAN13Sequence(quantity) {
-      const codes = [];
-      let base = 789123456000; // base fictícia válida
-      for (let i = 0; i < quantity; i++) {
-        let partial = (base + i).toString().padStart(12, '0');
-        let fullCode = partial + calculateEAN13CheckDigit(partial);
-        codes.push(fullCode);
-      }
-      return codes;
-    }
-
-    // Gera sequencia simples para outros tipos só incrementando números, comprimento variável
-    function generateGenericSequence(quantity, length) {
-      const codes = [];
-      let base = 1000000000;
-      for (let i = 0; i < quantity; i++) {
-        let code = (base + i).toString();
-        if (code.length > length) {
-          code = code.slice(-length);
-        } else {
-          code = code.padStart(length, '0');
-        }
-        codes.push(code);
-      }
-      return codes;
-    }
-
-    function generateBarcodes() {
-      const output = document.getElementById("output");
-      const errorMessage = document.getElementById("errorMessage");
-      output.innerHTML = "";
-      errorMessage.textContent = "";
-
-      const type = document.getElementById("barcodeType").value;
-      const quantityInput = document.getElementById("quantityInput").value;
-      const quantity = quantityInput ? parseInt(quantityInput) : 0;
-      const manualInput = document.getElementById("codesInput").value.trim();
-
-      let codes = [];
-
-      if (manualInput) {
-        codes = manualInput.split(/\n|,/).map(c => c.trim()).filter(c => c);
-      }
-
-      if (!manualInput && quantity > 0) {
-        if (type === "EAN13") {
-          codes = generateEAN13Sequence(quantity);
-        } else {
-          // outros tipos geram sequencia com tamanho baseado no tipo
-          let length = 12;
-          if(type === "CODE128") length = 12;
-          else if(type === "CODE39") length = 10;
-          else if(type === "UPC") length = 12;
-          else if(type === "ITF") length = 14;
-
-          codes = generateGenericSequence(quantity, length);
-        }
-      }
-
-      if (codes.length === 0) {
-        errorMessage.textContent = "Informe os códigos manualmente ou uma quantidade para gerar.";
-        return;
-      }
-
-      codes.forEach(code => {
-        const div = document.createElement("div");
-        div.className = "barcode-card";
-
-        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.classList.add("barcode-svg");
-        svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-        svg.setAttribute("width", "180");
-        svg.setAttribute("height", "80");
-
-        try {
-          JsBarcode(svg, code, {
-            format: type,
-            lineColor: "#34495e",
-            width: 1.2,
-            height: 18.29,
-            displayValue: false,
-            fontSize: 14,
-            margin: 0,  
-          });
-          div.appendChild(svg);
-
-          const btnDownload = document.createElement("button");
-          btnDownload.className = "download-btn";
-          btnDownload.textContent = "Baixar PNG";
-          btnDownload.onclick = () => downloadPNG(svg, code);
-          div.appendChild(btnDownload);
-
-          output.appendChild(div);
-        } catch (e) {
-          errorMessage.textContent = `Erro ao gerar o código: ${code}`;
-        }
-      });
-    }
-
-    function downloadPNG(svg, code) {
-      const svgData = new XMLSerializer().serializeToString(svg);
-      const svgBlob = new Blob([svgData], {type:"image/svg+xml;charset=utf-8"});
-      const url = URL.createObjectURL(svgBlob);
-
-      const img = new Image();
-      img.onload = function() {
-        const canvas = document.createElement("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0);
-
-        URL.revokeObjectURL(url);
-        const pngFile = canvas.toDataURL("image/png");
-
-        const a = document.createElement("a");
-        a.download = code + ".png";
-        a.href = pngFile;
-        a.click();
-      };
-      img.src = url;
-    }
-
-    async function exportPDF() {
-  const output = document.getElementById("output");
-  const barcodeCards = output.querySelectorAll(".barcode-card");
-
-  if (barcodeCards.length === 0) {
-    alert("Nenhum código gerado para exportar.");
-    return;
-  }
-
-  const pdf = new jsPDF({
-    orientation: "portrait",
-    unit: "mm",
-    format: "a4"
-  });
-
-  const margin = 10; // margem da página
-  const cardWidth = 19.5; // largura em mm
-  const cardHeight = 8; // altura em mm
-  const spacingX = 5; // espaço horizontal entre os cards
-  const spacingY = 5; // espaço vertical entre os cards
-
-  const pageWidth = pdf.internal.pageSize.getWidth();
-  const pageHeight = pdf.internal.pageSize.getHeight();
-
-  const cols = Math.floor((pageWidth - margin * 2 + spacingX) / (cardWidth + spacingX));
-  const rows = Math.floor((pageHeight - margin * 2 + spacingY) / (cardHeight + spacingY));
-
-  let x = margin;
-  let y = margin;
-  let colCount = 0;
-  let rowCount = 0;
-
-  for (const card of barcodeCards) {
-    const svg = card.querySelector("svg");
-    if (!svg) continue;
-
-    const svgString = new XMLSerializer().serializeToString(svg);
-    const imgURI = await svgStringToImage(svgString);
-
-    if (imgURI) {
-      pdf.addImage(imgURI, "PNG", x, y, cardWidth, cardHeight);// 1. Desenha uma borda (linha de corte) ao redor do card
-pdf.setDrawColor(150); // cor cinza claro
-pdf.setLineWidth(0.2); // espessura da linha de corte
-pdf.rect(x-1, y-1, cardWidth+2, cardHeight+2); // desenha o retângulo
-
-// 2. Adiciona a imagem do código de barras
-pdf.addImage(imgURI, "PNG", x, y, cardWidth, cardHeight);
-
-
-      // Texto abaixo do código (opcional)
-      const codeText = card.querySelector("svg").getAttribute("data-code") || "";
-      pdf.setFontSize(6);
-      pdf.text(codeText, x + cardWidth / 2, y + cardHeight + 3, { align: "center" });
-    }
-
-    colCount++;
-    if (colCount >= cols) {
-      colCount = 0;
-      x = margin;
-      rowCount++;
-      if (rowCount >= rows) {
-        pdf.addPage();
-        y = margin;
-        rowCount = 0;
-      } else {
-        y += cardHeight + spacingY;
-      }
-    } else {
-      x += cardWidth + spacingX;
-    }
-  }
-
-  pdf.save("codigos_de_barras.pdf");
-}
-
-    function svgStringToImage(svgString) {
-      return new Promise((resolve) => {
-        const img = new Image();
-        const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-        const url = URL.createObjectURL(svgBlob);
-
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          canvas.width = img.width;
-          canvas.height = img.height;
-          const ctx = canvas.getContext("2d");
-          ctx.drawImage(img, 0, 0);
-          URL.revokeObjectURL(url);
-          resolve(canvas.toDataURL("image/png"));
-        };
-        img.onerror = () => {
-          resolve(null);
-        };
-
-        img.src = url;
-      });
-    }
-  </script>
 </body>
 </html>
-
-
-          
