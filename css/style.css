@@ -1,136 +1,165 @@
 body {
-  background: #f4f6fa;
+  background: linear-gradient(135deg, #f0f2f5, #e0e3e8);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
 }
+
 .container {
   max-width: 960px;
-  margin: 2rem auto;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgb(0 0 0 / 0.1);
-  padding: 2rem 3rem;
+  margin: 3rem auto;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
+  padding: 2.5rem 3rem;
+  backdrop-filter: blur(8px);
+  transition: 0.3s ease-in-out;
 }
+
 h1 {
+  font-size: 2.75rem;
   font-weight: 700;
-  font-size: 2.5rem;
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
+  color: #222;
   text-align: center;
-  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  letter-spacing: 0.8px;
 }
+
 .slogan {
-  font-size: 1.25rem;
-  font-weight: 500;
-  color: #2980b9;
+  font-size: 1.1rem;
   text-align: center;
-  margin-top: -0.5rem;
-  margin-bottom: 1.5rem;
+  color: #2980b9;
   font-style: italic;
+  margin-bottom: 2rem;
   letter-spacing: 0.5px;
 }
 
 label {
   font-weight: 600;
-  color: #34495e;
+  color: #444;
+  margin-bottom: 0.35rem;
   display: block;
-  margin-bottom: 0.5rem;
 }
+
 select,
 input[type="number"],
 input[type="text"],
 textarea {
-  border: 1.5px solid #ccc;
-  border-radius: 6px;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
   width: 100%;
-  transition: border-color 0.3s ease;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  background: #f9fafc;
+  transition: all 0.25s ease;
 }
+
 select:focus,
 input:focus,
 textarea:focus {
   border-color: #3498db;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
   outline: none;
 }
+
 button {
-  background-color: #2980b9;
-  color: white;
-  font-weight: 700;
-  font-size: 1.1rem;
-  padding: 0.75rem 1.75rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-  margin-top: 1rem;
   display: block;
   width: 100%;
-  max-width: 320px;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 5px 15px rgb(41 128 185 / 0.4);
+  max-width: 280px;
+  margin: 2rem auto 1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #2980b9, #3498db);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(41, 128, 185, 0.3);
+  transition: 0.3s ease;
 }
+
 button:hover {
-  background-color: #1c5980;
+  background: linear-gradient(135deg, #226ea0, #2c90d1);
 }
+
 .barcodes {
   margin-top: 2rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 1.5rem;
   justify-content: center;
 }
+
 .barcode-card {
-  background: #ecf0f1;
-  border-radius: 12px;
-  padding: 1rem;
+  background: white;
+  border-radius: 16px;
+  padding: 1.25rem;
   width: 200px;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 0.1);
   text-align: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease;
 }
+
+.barcode-card:hover {
+  transform: translateY(-5px);
+}
+
 .barcode-svg {
   margin-bottom: 1rem;
   max-width: 100%;
   height: auto;
 }
+
 .download-btn {
-  background-color: #27ae60;
-  padding: 0.5rem 1rem;
+  background: #2ecc71;
   color: white;
+  padding: 0.5rem 0.75rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
+  transition: background 0.25s ease;
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
   width: 100%;
-  box-shadow: 0 3px 8px rgb(39 174 96 / 0.5);
-  transition: background-color 0.25s ease;
 }
+
 .download-btn:hover {
-  background-color: #1e8449;
+  background: #27ae60;
 }
+
 .error {
   color: #e74c3c;
   text-align: center;
-  font-weight: 700;
-  margin-top: 1rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
 }
+
 .flex-row {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
+
 .flex-col {
   flex: 0 0 23%;
   min-width: 200px;
 }
+
 @media (max-width: 1024px) {
   .flex-col {
     flex: 0 0 48%;
   }
 }
+
 @media (max-width: 600px) {
   .flex-col {
     flex: 0 0 100%;
+  }
+
+  .container {
+    padding: 1.5rem;
   }
 }
