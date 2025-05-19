@@ -264,9 +264,9 @@
             lineColor: "#34495e",
             width: 1.2,
             height: 18.29,
-            displayValue: true,
+            displayValue: false,
             fontSize: 14,
-            margin: 0,
+            margin: 0,  
           });
           div.appendChild(svg);
 
@@ -323,8 +323,8 @@
   });
 
   const margin = 10; // margem da página
-  const cardWidth = 30; // largura em mm
-  const cardHeight = 18.29; // altura em mm
+  const cardWidth = 19.5; // largura em mm
+  const cardHeight = 8; // altura em mm
   const spacingX = 5; // espaço horizontal entre os cards
   const spacingY = 5; // espaço vertical entre os cards
 
@@ -407,5 +407,6 @@ pdf.addImage(imgURI, "PNG", x, y, cardWidth, cardHeight);
   </script>
 </body>
 </html>
+
 
           
